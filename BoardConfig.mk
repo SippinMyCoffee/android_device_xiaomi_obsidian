@@ -16,7 +16,7 @@ BOARD_OS_PATCH_LEVEL := 2025-11
 
 # Kernel & Boot Header (Mandatory for GKI 3.0 / Baklava)
 BOARD_BOOT_HEADER_VERSION := 4
-BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Page Size & Verified Offsets (From your Sniff)
 BOARD_PAGE_SIZE := 4096
