@@ -1,27 +1,36 @@
 DEVICE_PATH := device/xiaomi/obsidian
 
-# Architecture
+# Architecture - MT6789H (Helio G100)
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 
-# Kernel Config
-BOARD_KERNEL_PAGESIZE := 4096
+# Android 16 (Baklava) Flags
+PLATFORM_VERSION := 16
+PLATFORM_SDK_VERSION := 36
+
+# Kernel & Boot Header (Mandatory for HyperOS 3)
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_KERNEL_PAGESIZE := 4096
 
-# Recovery Logic for A/B Device
+# Partition Management (Strict 64MB Limit)
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_FLASH_BLOCK_SIZE := 262144
+
+# TWRP & Recovery Logic
 BOARD_USES_RECOVERY_AS_BOOT := false
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
-
-# Partition Limits (DO NOT EXCEED 64MB)
-BOARD_FLASH_BLOCK_SIZE := 262144
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
-
-# Platform - MT6789 is the base ID for Helio G100
 TARGET_BOARD_PLATFORM := mt6789
 
-# Size Management (Ensures the build fits in 64MB)
+# Size Optimization for 64MB
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := false
 TW_INCLUDE_CRYPTO := true
+
+# AVB Signing (Mandatory for Android 16 Baklava)
+BOARD_AVB_ENABLE := true
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
