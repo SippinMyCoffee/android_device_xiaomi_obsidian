@@ -1,4 +1,3 @@
-# Inherit from GKI
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 # Set the fstab (The one we just made)
@@ -13,5 +12,13 @@ TARGET_SCREEN_WIDTH := 1080
 PRODUCT_DEFAULT_LOCALE := en_US
 
 # TWRP Configuration
+# This ensures your custom BoardConfig variables are parsed during the build
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/BoardConfig.mk:recovery/root/BoardConfig.mk
+
+# Extra Baklava/GKI Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.debuggable=1 \
+    ro.adb.secure=0 \
+    persist.sys.usb.config=mtp,adb \
+    ro.tw.disable_pagemap=1
