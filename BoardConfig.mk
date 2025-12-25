@@ -10,15 +10,18 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# Tells TWRP to live in vendor_boot instead of a separate partition
+# Recovery Logic for A/B Device
 BOARD_USES_RECOVERY_AS_BOOT := false
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 
-# Partitions
+# Partition Limits (DO NOT EXCEED 64MB)
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
-# Platform - MT6789 is the correct ID for Helio G100-Ultra
+# Platform - MT6789 is the base ID for Helio G100
 TARGET_BOARD_PLATFORM := mt6789
+
+# Size Management (Ensures the build fits in 64MB)
+TW_THEME := portrait_hdpi
+TW_EXTRA_LANGUAGES := false
+TW_INCLUDE_CRYPTO := true
