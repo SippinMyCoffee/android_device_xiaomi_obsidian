@@ -3,4 +3,4 @@
 /product        erofs     product                            flags=display="Product";backup=1;logical
 /metadata       ext4      /dev/block/by-name/metadata        flags=display="Metadata"
 /data           f2fs      /dev/block/by-name/userdata        flags=display="Data"
-/external_sd    vfat      /dev/block/mmcblk0p1               flags=display="MicroSD";storage;wipeui;removable
+/cache          ext4      /dev/block/by-name/cache           flags=display="Cache"
